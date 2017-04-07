@@ -1,0 +1,3 @@
+C:\Users\drroo\Documents\GitProjects\Wi-Fishka\bin\Debug\Homm.Client.exe.config
+C:\Users\drroo\Documents\GitProjects\Wi-Fishka\obj\Debug\Homm.Client.csprojResolveAssemblyReference.cache
+C:\Users\drroo\Documents\GitProjects\Wi-Fishka\Client\bin\Debug\Homm.Client.exe.config

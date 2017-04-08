@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using HoMM;
 using HoMM.ClientClasses;
 
@@ -10,33 +6,38 @@ namespace Homm.Client
 {
     public class Bot
     {
-        //private HommSensorData sensorData;
-        //private HommClient client;
+        private HommSensorData sensorData;
+        private readonly HommClient client;
+        private Traveler disc;
 
-        //public Bot(HommSensorData sensorData, HommClient client)
-        //{
-        //    this.sensorData = sensorData;
-        //    this.client = client;
-        //}
-
-        public void Play(HommSensorData sensorData, HommClient client)
+        public Bot(HommSensorData sensorData, HommClient client)
         {
-            var discoverer = new Discoverer(sensorData.Map, sensorData.MyArmy);
-            var finder = new Finder();
+            this.sensorData = sensorData;
+            this.client = client;
+        }
 
-            var resourses = finder.SortByDistance(finder.FindAllResourses(sensorData.Map), sensorData, discoverer);
-            var reachableResourses = resourses.Where(x => discoverer.IsReachable(x));
-            //var wayInLocations = discoverer.GetWay(sensorData.Location.ToLocation(), reachableResourses.First());
-            //var way = discoverer.WayToDirection(sensorData, wayInLocations);
-            //discoverer.FollowTheWay(sensorData, client, way);
-            foreach (var resourse in reachableResourses)
+        public void Play()
+        {
+            PickUpResources();
+        }
+
+        public void PickUpResources()
+        {
+            disc = new Traveler(sensorData.Map,sensorData.MyArmy);
+            var resource = sensorData.Map.FindAllResourses().SortByDistance(sensorData,disc).FirstOrDefault();
+            while (resource != null)
             {
-                var wayLocations = discoverer.GetWay(sensorData.Location.ToLocation(), resourse);
-                var way = discoverer.WayToDirection(sensorData, wayLocations);
-                discoverer.FollowTheWay(sensorData, client, way);
+                MoveTo(resource);
+                resource = sensorData.Map.FindAllResourses().SortByDistance(sensorData, disc).FirstOrDefault();
             }
         }
 
-        
+        public void MoveTo(Location target)
+        {
+            var way = disc.GetWay(sensorData.Location.ToLocation(), target);
+            var directions = way.ToDirections();
+            foreach (var direction in directions)
+                sensorData = client.Move(direction);
+        }
     }
 }

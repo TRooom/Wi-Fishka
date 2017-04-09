@@ -8,6 +8,7 @@ namespace Homm.Client
     public class Program
     {
         // Вставьте сюда свой личный CvarcTag для того, чтобы учавствовать в онлайн соревнованиях.
+        // 4b51d908-120b-4db2-b7a6-2d7c4bd32c9c
         public static readonly Guid CvarcTag = Guid.Parse("00000000-0000-0000-0000-000000000000");
 
 
@@ -41,10 +42,11 @@ namespace Homm.Client
 
                 level: HommLevel.Level2,    // Здесь можно выбрать уровень. На уровне два на карте присутствует оппонент.
 
-                isOnLeftSide: false          // Вы можете указать, с какой стороны будет находиться замок героя при игре на втором уровне.
+                isOnLeftSide: true         // Вы можете указать, с какой стороны будет находиться замок героя при игре на втором уровне.
                                             // Помните, что на сервере выбор стороны осуществляется случайным образом, поэтому ваш код
                                             // должен работать одинаково хорошо в обоих случаях.
             );
+            Extensions.AddInformation(sensorData);
             var ai = new Bot(sensorData,client);
             ai.Play();
             client.Wait(5);

@@ -59,6 +59,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitConstants.cs" />
+    <Compile Include="WayInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

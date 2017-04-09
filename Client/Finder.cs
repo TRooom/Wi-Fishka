@@ -70,7 +70,7 @@ namespace Homm.Client
                 .Select(mapObject => mapObject.Location.ToLocation());
         }
 
-        public static IEnumerable<Location> SortByDistance(this IEnumerable<Location> enumerable, HommSensorData sensorData, Traveler traveler)
+        public static IEnumerable<Location> SortByDistanceFromHero(this IEnumerable<Location> enumerable, HommSensorData sensorData, Traveler traveler)
         {
             return enumerable
                 .Where(target => traveler.GetWay(sensorData.Location.ToLocation(), target).Count != 0)

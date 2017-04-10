@@ -1,4 +1,3 @@
-/**/*
-!/Client/*.cs
-!/Client/*sln
-!/Client/*csprj
+/Binaries/
+/Client/obj
+/Client/.vs
